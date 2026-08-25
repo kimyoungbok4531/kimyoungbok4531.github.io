@@ -7,7 +7,7 @@
 - 예약은 전화·문자로 연결됩니다. 폼 전송이 없어 개인정보를 저장하지 않습니다.
 - 이용자 대부분이 모바일이라 **모바일을 기준으로 만들고 768px 이상에서 넓힙니다.**
 
-현재 주소 : **https://ey.io.kr/20260822/**
+주소 : **https://arevampedpettaxi.co.kr**
 
 ---
 
@@ -39,7 +39,7 @@ favicon.ico
 `images` 폴더에서 **바꾸고 싶은 파일과 같은 이름으로 새 사진을 올리면** 끝입니다.
 코드는 하나도 고치지 않아도 됩니다.
 
-1. GitHub 저장소에서 `20260822` → `images` 폴더로 들어갑니다
+1. GitHub 저장소에서 `images` 폴더로 들어갑니다
 2. 바꿀 파일을 클릭 → 오른쪽 위 **휴지통 아이콘**으로 삭제
 3. **Add file → Upload files** 로 새 사진을 올립니다 (파일 이름을 똑같이 맞춰 주세요)
 4. 아래 **Commit changes** 를 누르면 1~2분 뒤 사이트에 반영됩니다
@@ -192,7 +192,7 @@ python3 bump-version.py
 
 ## GitHub Pages 배포
 
-저장소 `e7yxi77/e7yxi77.github.io` 의 `20260822/` 폴더에 올리면 자동으로 배포됩니다.
+저장소 `kimyoungbok4531/kimyoungbok4531.github.io` 의 **루트**에 올리면 자동으로 배포됩니다.
 
 ```bash
 git add .
@@ -200,7 +200,23 @@ git commit -m "설명"
 git push
 ```
 
-주소가 바뀌면 세 HTML 의 `canonical` · `og:url` · `og:image` 와 JSON-LD 의 `url` 을 함께 고쳐야 합니다.
+1~2분 뒤 **https://arevampedpettaxi.co.kr** 에 반영됩니다.
+
+### 도메인 설정 (이미 되어 있습니다)
+
+- 저장소에 `CNAME` 파일 : `arevampedpettaxi.co.kr`
+- 도메인 등록업체 DNS :
+  ```
+  A      @     185.199.108.153
+  A      @     185.199.109.153
+  A      @     185.199.110.153
+  A      @     185.199.111.153
+  CNAME  www   kimyoungbok4531.github.io
+  ```
+- GitHub 저장소 → Settings → Pages → **Enforce HTTPS** 켜짐
+
+> 주소를 바꾸실 일이 생기면 세 HTML 의 `canonical` · `og:url` · `og:image` 와
+> JSON-LD 의 `url`, 그리고 `CNAME` 파일을 함께 고쳐야 합니다.
 
 ### 로컬에서 미리 보기
 
