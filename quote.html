@@ -1,0 +1,347 @@
+<!DOCTYPE html>
+<!--
+  ================================================================
+  편한 펫택시&피크닉 — 견적 요청
+
+  입력한 내용은 어디에도 전송·저장되지 않고
+  보호자님 브라우저 안에서만 처리됩니다.
+  ================================================================
+-->
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <title>견적 요청 | 편한 펫택시&amp;피크닉</title>
+    <meta name="description" content="이동 정보를 입력해 견적 요청서를 작성해 주세요. 메시지 또는 전화로 접수해주시면 이용 일정과 금액을 안내드립니다.">
+    <meta name="theme-color" content="#14120D">
+    <link rel="canonical" href="https://arevampedpettaxi.co.kr/quote.html">
+    <meta property="og:type" content="website">
+    <meta property="og:site_name" content="편한 펫택시&피크닉">
+    <meta property="og:title" content="견적 요청 | 편한 펫택시&피크닉">
+    <meta property="og:description" content="이동 정보를 바탕으로 이용 일정과 금액을 안내드립니다.">
+    <meta property="og:url" content="https://arevampedpettaxi.co.kr/quote.html">
+    <meta property="og:image" content="https://arevampedpettaxi.co.kr/images/og-image.jpg">
+    <meta property="og:locale" content="ko_KR">
+
+    <link rel="icon" href="favicon.ico" sizes="any">
+    <link rel="icon" type="image/svg+xml" href="images/favicon.svg">
+    <link rel="apple-touch-icon" href="images/favicon-180.png">
+
+    <link rel="preconnect" href="https://cdn.jsdelivr.net">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;500;600&display=swap">
+    <link rel="stylesheet" href="styles.css?v=9b979e79">
+</head>
+<body>
+    <a class="skip-link" href="#main">본문 바로가기</a>
+
+    <header class="hd">
+        <div class="wrap hd-in">
+            <a class="hd-logo" href="index.html" aria-label="편한 펫택시앤피크닉 홈">
+                <img class="hd-mark" src="images/favicon.svg" alt="" width="26" height="26">
+                <span class="hd-name">편한 <em>펫택시</em>&amp;피크닉</span>
+            </a>
+            <span class="hd-sp"></span>
+            <button class="hd-cta" type="button" data-call>
+                <span class="ic ic-phone" aria-hidden="true"></span>전화 상담
+            </button>
+            <button class="nav-fold" type="button" id="nav-fold" aria-expanded="false" aria-controls="navpanel" aria-label="메뉴 열기">
+                <span class="nav-burger" aria-hidden="true"><i></i><i></i></span>
+            </button>
+        </div>
+    </header>
+
+    <div class="navpanel" id="navpanel">
+        <nav class="wrap navlist" id="tabs" aria-label="바로가기">
+            <a class="tab" href="index.html#home">홈</a>
+            <a class="tab" href="index.html#car">차량</a>
+            <a class="tab" href="index.html#clean">소독</a>
+            <a class="tab" href="index.html#service">서비스</a>
+                <a class="tab" href="index.html#picnic">펫크닉</a>
+            <a class="tab" href="review.html">후기</a>
+            <a class="tab is-on" href="quote.html" aria-current="page">견적 요청</a>
+        </nav>
+    </div>
+
+
+    
+    <main id="main">
+        <section class="sec">
+            <div class="wrap">
+                <div class="sec-head">
+                    <span class="eyebrow">Quote</span>
+                    <h1 class="sec-title">이동 견적을 <em>간편하게 요청하세요</em></h1>
+                    <p class="sec-desc">
+                        이동 정보를 입력하시면 <b>견적 요청서</b>가 자동으로 작성됩니다.
+                        메시지 또는 전화로 접수해주시면 이용 일정과 금액을 안내드립니다.
+                    </p>
+                </div>
+
+                <form class="qform" id="qform" autocomplete="off">
+
+                    <!-- 1단계 : 언제 어디로 -->
+                    <section class="qstep">
+                        <div class="qstep-hd"><span class="qstep-n">1</span><span class="qstep-t">이동 일정과 경로</span></div>
+
+                        <div class="qrow-2">
+                            <label class="qfield">
+                                <span class="qlabel">이용 날짜</span>
+                                <input type="date" id="q-date">
+                            </label>
+                            <label class="qfield">
+                                <span class="qlabel">출발 시간</span>
+                                <input type="time" id="q-time">
+                            </label>
+                        </div>
+
+                    <div class="qfield">
+                        <span class="qlabel">출발지</span>
+                        <div class="qaddr">
+                            <input type="text" id="q-from" placeholder="주소를 검색해 주세요" readonly>
+                            <button class="qsearch" type="button" data-addr="q-from">주소 검색</button>
+                        </div>
+                        <input type="text" id="q-from-detail" class="qdetail" placeholder="상세주소 (동·호수, 건물명)">
+                    </div>
+
+                    <div class="qfield">
+                        <span class="qlabel">도착지</span>
+                        <div class="qaddr">
+                            <input type="text" id="q-to" placeholder="주소를 검색해 주세요" readonly>
+                            <button class="qsearch" type="button" data-addr="q-to">주소 검색</button>
+                        </div>
+                        <input type="text" id="q-to-detail" class="qdetail" placeholder="상세주소 (동·호수, 건물명)">
+                    </div>
+                    </section>
+
+                    <!-- 2단계 : 왕복 -->
+                    <section class="qstep">
+                        <div class="qstep-hd"><span class="qstep-n">2</span><span class="qstep-t">왕복 이용 여부</span></div>
+
+                        <label class="qtrip" id="q-trip-box">
+                            <input type="checkbox" id="q-trip">
+                            <span class="qtrip-box" aria-hidden="true"><span class="ic ic-check"></span></span>
+                            <span class="qtrip-b">
+                                <span class="qtrip-t">왕복 이용을 신청합니다</span>
+                                <span class="qtrip-d">복귀 픽업 정보를 함께 입력합니다</span>
+                            </span>
+                        </label>
+
+                        <div class="qreturn" id="q-return">
+                            <p class="qreturn-hd">돌아오는 길 픽업 정보</p>
+
+                            <div class="qrow-2">
+                                <label class="qfield">
+                                    <span class="qlabel">복귀 날짜</span>
+                                    <input type="date" id="r-date">
+                                </label>
+                                <label class="qfield">
+                                    <span class="qlabel">픽업 시간</span>
+                                    <input type="time" id="r-time">
+                                </label>
+                            </div>
+
+                            <div class="qfield">
+                                <span class="qlabel">복귀 출발지</span>
+                                <div class="qaddr">
+                                    <input type="text" id="r-from" placeholder="주소를 검색해 주세요" readonly>
+                                    <button class="qsearch" type="button" data-addr="r-from">주소 검색</button>
+                                </div>
+                                <input type="text" id="r-from-detail" class="qdetail" placeholder="상세주소 (동·호수, 건물명)">
+                            </div>
+
+                            <div class="qfield">
+                                <span class="qlabel">복귀 도착지</span>
+                                <div class="qaddr">
+                                    <input type="text" id="r-to" placeholder="주소를 검색해 주세요" readonly>
+                                    <button class="qsearch" type="button" data-addr="r-to">주소 검색</button>
+                                </div>
+                                <input type="text" id="r-to-detail" class="qdetail" placeholder="상세주소 (동·호수, 건물명)">
+                            </div>
+
+                            <label class="qfield">
+                                <span class="qlabel">복귀 요청사항 <em>선택</em></span>
+                                <textarea id="r-note" rows="2" placeholder="예) 진료 시간이 길어질 경우 연락 부탁드립니다."></textarea>
+                            </label>
+                        </div>
+                    </section>
+
+                    <!-- 3단계 : 누가 타나요 -->
+                    <section class="qstep">
+                        <div class="qstep-hd"><span class="qstep-n">3</span><span class="qstep-t">탑승 정보</span></div>
+
+                        <div class="qfield">
+                            <span class="qlabel">함께 타시는 분</span>
+                            <div class="qty-group">
+                        <div class="qty" data-key="human">
+                            <span class="qty-k">보호자</span>
+                            <button class="qty-btn" type="button" data-step="-1" aria-label="보호자 줄이기">−</button>
+                            <output class="qty-v">1</output>
+                            <button class="qty-btn" type="button" data-step="1" aria-label="보호자 늘리기">+</button>
+                            <span class="qty-u">명</span>
+                        </div>
+                            </div>
+                        </div>
+
+                        <div class="qfield">
+                            <span class="qlabel">반려동물</span>
+                            <div class="qty-group">
+                        <div class="qty" data-key="dogS">
+                            <span class="qty-k">소형견</span>
+                            <button class="qty-btn" type="button" data-step="-1" aria-label="소형견 줄이기">−</button>
+                            <output class="qty-v">0</output>
+                            <button class="qty-btn" type="button" data-step="1" aria-label="소형견 늘리기">+</button>
+                            <span class="qty-u">마리</span>
+                        </div>
+                        <div class="qty" data-key="dogM">
+                            <span class="qty-k">중형견</span>
+                            <button class="qty-btn" type="button" data-step="-1" aria-label="중형견 줄이기">−</button>
+                            <output class="qty-v">0</output>
+                            <button class="qty-btn" type="button" data-step="1" aria-label="중형견 늘리기">+</button>
+                            <span class="qty-u">마리</span>
+                        </div>
+                        <div class="qty" data-key="dogL">
+                            <span class="qty-k">대형견</span>
+                            <button class="qty-btn" type="button" data-step="-1" aria-label="대형견 줄이기">−</button>
+                            <output class="qty-v">0</output>
+                            <button class="qty-btn" type="button" data-step="1" aria-label="대형견 늘리기">+</button>
+                            <span class="qty-u">마리</span>
+                        </div>
+                        <div class="qty" data-key="cat">
+                            <span class="qty-k">고양이</span>
+                            <button class="qty-btn" type="button" data-step="-1" aria-label="고양이 줄이기">−</button>
+                            <output class="qty-v">0</output>
+                            <button class="qty-btn" type="button" data-step="1" aria-label="고양이 늘리기">+</button>
+                            <span class="qty-u">마리</span>
+                        </div>
+                            </div>
+                            <p class="qhint">이동장 없이도 이용 가능합니다. 기타 반려동물은 요청사항에 기재해 주세요.</p>
+                        </div>
+                    </section>
+
+                    <!-- 4단계 : 짐과 요청사항 -->
+                    <section class="qstep">
+                        <div class="qstep-hd"><span class="qstep-n">4</span><span class="qstep-t">수하물 및 요청사항</span></div>
+
+                        <div class="qfield">
+                            <span class="qlabel">짐</span>
+                            <div class="chips" id="q-bag" role="group" aria-label="짐 현황">
+                                <button class="chip is-on" type="button" data-val="없음" aria-pressed="true">없음</button>
+                                <button class="chip" type="button" data-val="이동장 1개" aria-pressed="false">이동장 1개</button>
+                                <button class="chip" type="button" data-val="이동장 2개 이상" aria-pressed="false">이동장 2개 이상</button>
+                                <button class="chip" type="button" data-val="유모차 있음" aria-pressed="false">유모차 있음</button>
+                                <button class="chip" type="button" data-val="캐리어 있음" aria-pressed="false">캐리어 있음</button>
+                            </div>
+                        </div>
+
+                        <label class="qfield">
+                            <span class="qlabel">요청사항 <em>선택</em></span>
+                            <textarea id="q-note" rows="3" placeholder="예) 낯선 환경에 예민합니다 / 노령견으로 천천한 이동을 요청합니다."></textarea>
+                        </label>
+                    </section>
+                </form>
+
+                <div class="quote-actions" id="q-actions">
+                    <button class="btn btn-main" type="button" id="q-copy">
+                        <span class="ic ic-copy" aria-hidden="true"></span>내용 복사하기
+                    </button>
+                    <button class="btn btn-line" type="button" id="q-pdf">
+                        <span class="ic ic-down" aria-hidden="true"></span>견적서 다운로드
+                    </button>
+                </div>
+
+                <button class="btn btn-main btn-block btn-lg" type="button" id="q-send" data-send hidden>
+                    <span class="ic ic-doc" aria-hidden="true"></span>견적서 보내기
+                </button>
+
+                <p class="quote-guide">복사하거나 내려받은 뒤 <b>문의하실 영업점으로 접수</b>해 주세요.</p>
+                <section class="sendbox" id="sendbox" hidden></section>
+                </div>
+            </div>
+        </section>
+
+        <section class="sec sec-grey">
+            <div class="wrap">
+                <div class="sec-head">
+                    <span class="eyebrow">Process</span>
+                    <h2 class="sec-title">문의부터 도착까지 <em>체계적으로 안내합니다</em></h2>
+                </div>
+                <ol class="steps">
+                    <li><b>01</b><span class="st">문의 접수</span><span class="sd">견적 요청서를 메시지 또는 전화로 보내주세요.</span></li>
+                    <li><b>02</b><span class="st">예약 안내</span><span class="sd">차량, 시간 및 이용 금액을 안내드립니다.</span></li>
+                    <li><b>03</b><span class="st">차량 준비</span><span class="sd">배차 전 차량 위생 관리를 진행합니다.</span></li>
+                    <li><b>04</b><span class="st">픽업 · 이동</span><span class="sd">약속된 시간에 방문하여 안전하게 모십니다.</span></li>
+                    <li><b>05</b><span class="st">목적지 도착</span><span class="sd">도착 후 보호자님께 안내드립니다.</span></li>
+                </ol>
+            </div>
+        </section>
+    </main>
+
+    <footer class="ft">
+        <div class="wrap">
+            <a class="ft-map" href="https://map.naver.com/p/entry/place/1360546730" target="_blank" rel="noopener">
+                <span class="ic ic-map" aria-hidden="true"></span>네이버 지도에서 보기
+            </a>
+            <p class="ft-line">
+                <img class="ft-mark" src="images/favicon.svg" alt="" width="18" height="18">
+                <b>편한 펫택시&amp;피크닉</b>
+                <span>경기 남양주시 백봉로 32</span>
+                <span>대표 0507-1417-6722</span>
+                <span>남양주 010-2300-6722</span>
+                <span>인천 010-4707-7334</span>
+                <span>24시간 연중무휴</span>
+            </p>
+            <p class="ft-copy">© 편한 펫택시&amp;피크닉. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <!-- 인쇄(PDF 저장) 전용 견적서 -->
+    <div class="quote-sheet" id="quote-sheet" aria-hidden="true">
+        <header class="psheet-head">
+            <div>
+                <p class="psheet-brand">편한 <span>펫택시</span>&amp;피크닉</p>
+                <p class="psheet-tag">반려동물 전용 이동 서비스 · 24시간 연중무휴</p>
+            </div>
+            <div class="psheet-head-r">
+                <p class="psheet-title">견적 요청서</p>
+                <p class="psheet-date" id="sheet-made"></p>
+            </div>
+        </header>
+        <table class="psheet-table"><tbody id="sheet-body"></tbody></table>
+        <footer class="psheet-foot">
+            <p>이 요청서를 메시지로 보내주시면 이용 금액을 안내해드립니다.</p>
+            <p class="psheet-contact">
+                편한 펫택시&amp;피크닉 · 대표번호 0507-1417-6722<br>
+                남양주지사 010-2300-6722 · 인천지사 010-4707-7334<br>
+                경기 남양주시 백봉로 32 · 24시간 연중무휴
+            </p>
+        </footer>
+    </div>
+
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "LocalBusiness",
+      "name": "편한 펫택시&피크닉",
+      "description": "위생 관리와 안전 운행을 바탕으로 병원, 미용, 공항, 이사, 장례식장 및 전국 장거리 이동을 지원하는 반려동물 전용 이동 서비스입니다.",
+      "image": "https://arevampedpettaxi.co.kr/images/og-image.jpg",
+      "telephone": "+82-507-1417-6722",
+      "address": {
+        "@type": "PostalAddress",
+        "streetAddress": "백봉로 32",
+        "addressLocality": "남양주시",
+        "addressRegion": "경기도",
+        "addressCountry": "KR"
+      },
+      "areaServed": "대한민국",
+      "openingHours": "Mo-Su 00:00-23:59",
+      "url": "https://arevampedpettaxi.co.kr/"
+    }
+    </script>
+    <script src="https://t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js" defer></script>
+    <script src="site.js?v=9b979e79"></script>
+    <script src="script.js?v=9b979e79"></script>
+    <script src="quote.js?v=9b979e79"></script>
+</body>
+</html>

@@ -1,0 +1,359 @@
+<!DOCTYPE html>
+<!--
+  ================================================================
+  편한 펫택시&피크닉 — 반려동물 전용 이동 서비스
+  정적 사이트 · 백엔드 없음 · GitHub Pages 배포용
+
+  [ 사진 교체 ]      images 폴더에 같은 이름으로 덮어쓰기
+  [ 사진 추가·삭제 ] site.js 목록 수정
+  [ 연락처 변경 ]    site.js 의 BRANCHES
+  [ 후기 변경 ]      reviews.js
+  자세한 방법은 README.md 참고
+  ================================================================
+-->
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <title>편한 펫택시&amp;피크닉 | 반려동물의 안전한 이동을 위한 선택</title>
+    <meta name="description" content="정기적인 스팀·습식·연무 위생 관리를 거친 반려동물 전용 차량으로 병원, 미용, 공항, 장거리 이동을 함께합니다. 24시간 연중무휴 상담. 남양주 0507-1417-6722">
+    <meta name="theme-color" content="#14120D">
+    <link rel="canonical" href="https://arevampedpettaxi.co.kr/">
+
+    <meta property="og:type" content="website">
+    <meta property="og:site_name" content="편한 펫택시&피크닉">
+    <meta property="og:title" content="편한 펫택시&피크닉 | 반려동물의 안전한 이동을 위한 선택">
+    <meta property="og:description" content="위생 관리와 세심한 운행으로 반려동물의 모든 이동을 함께합니다. 24시간 연중무휴.">
+    <meta property="og:url" content="https://arevampedpettaxi.co.kr/">
+    <meta property="og:image" content="https://arevampedpettaxi.co.kr/images/og-image.jpg">
+    <meta property="og:locale" content="ko_KR">
+    <meta name="twitter:card" content="summary_large_image">
+
+    <link rel="icon" href="favicon.ico" sizes="any">
+    <link rel="icon" type="image/svg+xml" href="images/favicon.svg">
+    <link rel="apple-touch-icon" href="images/favicon-180.png">
+
+    <link rel="preconnect" href="https://cdn.jsdelivr.net">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;500;600&display=swap">
+    <link rel="stylesheet" href="styles.css?v=9b979e79">
+</head>
+<body>
+    <a class="skip-link" href="#main">본문 바로가기</a>
+
+    <!-- 상단 바 -->
+    <header class="hd">
+        <div class="wrap hd-in">
+            <a class="hd-logo" href="index.html" aria-label="편한 펫택시앤피크닉 홈">
+                <img class="hd-mark" src="images/favicon.svg" alt="" width="26" height="26">
+                <span class="hd-name">편한 <em>펫택시</em>&amp;피크닉</span>
+            </a>
+            <span class="hd-sp"></span>
+            <button class="hd-cta" type="button" data-call>
+                <span class="ic ic-phone" aria-hidden="true"></span>전화 상담
+            </button>
+            <button class="nav-fold" type="button" id="nav-fold" aria-expanded="false" aria-controls="navpanel" aria-label="메뉴 열기">
+                <span class="nav-burger" aria-hidden="true"><i></i><i></i></span>
+            </button>
+        </div>
+    </header>
+
+    <div class="navpanel" id="navpanel">
+        <nav class="wrap navlist" id="tabs" aria-label="바로가기">
+            <a class="tab is-on" href="#home">홈</a>
+            <a class="tab" href="#car">차량</a>
+            <a class="tab" href="#clean">소독</a>
+            <a class="tab" href="#service">서비스</a>
+                <a class="tab" href="#picnic">펫크닉</a>
+            <a class="tab" href="#review">후기</a>
+            <a class="tab" href="quote.html">견적 요청</a>
+        </nav>
+    </div>
+
+
+    <!-- 카테고리 탭 (모바일에서 접을 수 있습니다) -->
+    
+    <main id="main">
+
+        <!-- 히어로 -->
+        <section class="hero" id="home">
+            <div class="hero-bg" aria-hidden="true">
+                <img src="images/car-01-white-exterior.jpg" alt="" width="1200" height="1600" fetchpriority="high">
+            </div>
+            <div class="hero-in">
+                <h1 class="hero-h1">반려동물의 이동에 <em>안심을 더합니다</em></h1>
+                <p class="hero-p">세심한 위생 관리와 안전 운행으로 목적지까지 함께합니다.</p>
+
+
+                <div class="hero-cta">
+                    <button class="btn btn-main btn-lg" type="button" data-call>
+                        <span class="ic ic-phone" aria-hidden="true"></span>전화 상담
+                    </button>
+                    <a class="btn btn-ghost-d btn-lg" href="quote.html">견적 요청</a>
+                </div>
+
+                <ul class="hero-stats">
+                    <li><span class="ic ic-clock" aria-hidden="true"></span><b>24시간</b><span>연중무휴</span></li>
+                    <li><span class="ic ic-shield" aria-hidden="true"></span><b>전국 운행</b><span>장거리 이동 가능</span></li>
+                    <li><span class="ic ic-spray" aria-hidden="true"></span><b>정기 위생 관리</b><span>소독 · 방역</span></li>
+                </ul>
+            </div>
+        </section>
+
+        <!-- 차량 -->
+        <section class="sec" id="car">
+            <div class="wrap">
+                <div class="sec-head rise">
+                    <span class="eyebrow">Vehicle</span>
+                    <h2 class="sec-title">이동의 품격을 높이는 <em>전용 차량</em></h2>
+                    <p class="sec-desc">PV5와 9인승 카니발로 반려동물과 보호자님을 편안하게 모십니다.</p>
+                </div>
+                <div class="rail rise" id="car-rail"></div>
+            </div>
+        </section>
+
+        <!-- 소독 · 방역 (핵심) -->
+        <section class="sec" id="clean">
+            <div class="wrap">
+                <div class="sec-head rise">
+                    <span class="eyebrow">Disinfection</span>
+                    <h2 class="sec-title">매일의 이동을 위한 <em>위생 관리</em></h2>
+                </div>
+
+                <div class="rail rise" id="clean-rail"></div>
+
+                <blockquote class="claim rise">
+                    <div class="claim-body">
+                        <p>실제로 병균과 혹시모를 진드기 모기들이 있는 펫택시를 타실건가요</p>
+                        <p class="lead"><em>저희는 양심을 팔지 않습니다</em></p>
+                        <p>매일 1시간씩 두번 소독과 스팀청소 습식 청소로 혹시모를 감염을 예방합니다</p>
+                        <p class="lead">저희는 소독 방역이 안된 차들은 <em>배차하지 않습니다</em></p>
+                    </div>
+                </blockquote>
+            </div>
+        </section>
+
+        <!-- 병균 경고 -->
+        <section class="sec germ" id="germ">
+            <div class="wrap">
+                <div class="sec-head rise">
+                    <span class="eyebrow">Care Standard</span>
+                    <h2 class="sec-title">보이지 않는 부분까지 <em>관리합니다</em></h2>
+                </div>
+
+                <div class="rail rise" id="germ-rail"></div>
+
+                <blockquote class="claim claim-warn rise">
+                    <div class="claim-body">
+                        <p class="lead"><em>99프로는 청소를 대충하는</em> 펫택시를 이용하시는 분들은 예약을 삼가해 주시기 바랍니다</p>
+                    </div>
+                </blockquote>
+            </div>
+        </section>
+
+        <!-- 서비스 -->
+        <section class="sec" id="service">
+            <div class="wrap">
+                <div class="sec-head rise">
+                    <span class="eyebrow">Service</span>
+                    <h2 class="sec-title">반려동물의 모든 여정에 <em>함께합니다</em></h2>
+                </div>
+
+                <div class="cards rise">
+                    <a class="card" href="quote.html">
+                        <span class="card-ic" aria-hidden="true"><span class="ic ic-hosp"></span></span>
+                        <p class="card-t">병원 이동</p>
+                        <p class="card-d">진료 일정에 맞춘 편안한 이동</p>
+                    </a>
+                    <a class="card" href="quote.html">
+                        <span class="card-ic" aria-hidden="true"><span class="ic ic-groom"></span></span>
+                        <p class="card-t">미용 · 호텔 · 유치원</p>
+                        <p class="card-d">방문부터 귀가까지 함께</p>
+                    </a>
+                    <a class="card" href="quote.html">
+                        <span class="card-ic" aria-hidden="true"><span class="ic ic-box"></span></span>
+                        <p class="card-t">이사 · 장거리</p>
+                        <p class="card-d">전국 장거리 이동 지원</p>
+                    </a>
+                    <a class="card" href="quote.html">
+                        <span class="card-ic" aria-hidden="true"><span class="ic ic-plane"></span></span>
+                        <p class="card-t">공항 · 여행</p>
+                        <p class="card-d">출·입국 일정에 맞춘 이동</p>
+                    </a>
+                    <a class="card" href="quote.html">
+                        <span class="card-ic" aria-hidden="true"><span class="ic ic-leaf"></span></span>
+                        <p class="card-t">장례식장</p>
+                        <p class="card-d">마지막 여정을 정중하게</p>
+                    </a>
+                    <a class="card" href="quote.html">
+                        <span class="card-ic" aria-hidden="true"><span class="ic ic-home"></span></span>
+                        <p class="card-t">보호소</p>
+                        <p class="card-d">구조 · 입소 · 임시보호 이동</p>
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        <!-- 펫크닉 (부가 서비스) -->
+        <section class="sec" id="picnic">
+            <div class="wrap">
+                <div class="sec-head rise">
+                    <span class="eyebrow">Pet Picnic</span>
+                    <h2 class="sec-title">반려동물과 함께하는 <em>나들이</em></h2>
+                    <p class="sec-desc">행동교정 훈련사 동행을 추가 가능하며 펫푸드 상담도 가능합니다</p>
+                </div>
+                <div class="poster-grid rise" id="picnic-grid"></div>
+            </div>
+        </section>
+
+        <!-- 후기 -->
+        <section class="sec" id="review">
+            <div class="wrap">
+                <div class="sec-head sec-head-row rise">
+                    <div>
+                        <span class="eyebrow">Review</span>
+                        <h2 class="sec-title">보호자님들이 전하는 <em>이용 경험</em></h2>
+                    </div>
+                    <a class="more" href="review.html">전체보기<span class="ic ic-arrow" aria-hidden="true"></span></a>
+                </div>
+                <div class="rail rise" id="review-rail"></div>
+            </div>
+        </section>
+
+        <!-- 훈련사 -->
+        <section class="sec" id="trainer">
+            <div class="wrap">
+                <div class="sec-head rise">
+                    <span class="eyebrow">Trainer</span>
+                    <h2 class="sec-title">행동 특성까지 이해하는 <em>전문 동행</em></h2>
+                </div>
+
+                <div class="trainer rise">
+                    <div class="trainer-hd">
+                        <span class="trainer-av" aria-hidden="true">KIM</span>
+                        <div>
+                            <p class="trainer-n">김지예 훈련사</p>
+                            <p class="trainer-r">반려동물행동교정사 · 2018년~</p>
+                        </div>
+                    </div>
+
+                    <ul class="cert">
+                        <li>반려동물관리사</li>
+                        <li>동물행동교정</li>
+                        <li>동물장례지도</li>
+                        <li>동물위탁서비스관리</li>
+                        <li>아로마 전문관리사 1·2급</li>
+                        <li>펫아로마 강사</li>
+                    </ul>
+
+                    <ul class="career is-folded" id="career">
+                        <li><span>한국반려동물자격관리협회 서울본회 전임강사</span><span class="cy">2025~</span></li>
+                        <li><span>서울 발달장애인 훈련센터 반려동물관리사 과정 강의</span><span class="cy">2026~</span></li>
+                        <li><span>통합형 직업교육 거점학교 강사</span><span class="cy">2026~</span></li>
+                        <li><span>도봉여성센터 펫푸드매니저 자격증 과정 강사</span><span class="cy">2026~</span></li>
+                        <li><span>구리시 평생학습관 반려동물 관리사 자격증반 강사</span><span class="cy">2025~</span></li>
+                        <li><span>도봉구장애인종합복지관 반려동물관리사 과정 강사</span><span class="cy">2025~</span></li>
+                        <li><span>구리시 반려동물 문화센터 동물행동교정 강사</span><span class="cy">2024</span></li>
+                        <li><span>강북구 사회적경제통합지원센터 기업간 협업사업</span><span class="cy">2023</span></li>
+                        <li><span>한국반려동물관리협회 행동교정사 직무교육 진행</span><span class="cy">2019~</span></li>
+                        <li><span>한국동물복지아트센터 전임 강사</span><span class="cy">2019</span></li>
+                        <li><span>남양주시 다산서당 동물복지 강사</span><span class="cy">2019~2020</span></li>
+                        <li><span>전국 중·고등학교 진로 특강 다수</span><span class="cy">2019~</span></li>
+                    </ul>
+                    <button class="career-more" type="button" id="career-more" aria-expanded="false" aria-controls="career">경력 전체 보기 (12건)</button>
+                </div>
+            </div>
+        </section>
+
+        <!-- 문의 -->
+        <section class="sec" id="contact">
+            <div class="wrap">
+                <div class="sec-head rise">
+                    <span class="eyebrow">Contact</span>
+                    <h2 class="sec-title">언제든 편하게 <em>문의하세요</em></h2>
+                    <p class="sec-desc">24시간 상담을 운영합니다. 운행 중 통화가 어려운 경우 <b>메시지를 남겨주시면 확인 후 신속히 안내드립니다.</b></p>
+                </div>
+
+                <div class="contact rise">
+                    <button class="contact-item" type="button" data-call>
+                        <span class="contact-ic" aria-hidden="true"><span class="ic ic-phone"></span></span>
+                        <span class="contact-b">
+                            <span class="ct-k">전화 상담</span>
+                            <span class="ct-v">영업점 선택</span>
+                        </span>
+                        <span class="ic ic-arrow" aria-hidden="true"></span>
+                    </button>
+                    <button class="contact-item" type="button" data-sms>
+                        <span class="contact-ic" aria-hidden="true"><span class="ic ic-sms"></span></span>
+                        <span class="contact-b">
+                            <span class="ct-k">메시지 상담</span>
+                            <span class="ct-v">영업점 선택</span>
+                        </span>
+                        <span class="ic ic-arrow" aria-hidden="true"></span>
+                    </button>
+                    <button class="contact-item" type="button" data-kakao>
+                        <span class="contact-ic is-kakao" aria-hidden="true"><span class="ic ic-talk"></span></span>
+                        <span class="contact-b">
+                            <span class="ct-k">카카오톡</span>
+                            <span class="ct-v">영업점 선택</span>
+                        </span>
+                        <span class="ic ic-arrow" aria-hidden="true"></span>
+                    </button>
+                    <a class="contact-item" href="https://map.naver.com/p/entry/place/1360546730" target="_blank" rel="noopener">
+                        <span class="contact-ic is-naver" aria-hidden="true"><span class="ic ic-map"></span></span>
+                        <span class="contact-b">
+                            <span class="ct-k">네이버 플레이스</span>
+                            <span class="ct-v">위치 · 후기</span>
+                        </span>
+                        <span class="ic ic-arrow" aria-hidden="true"></span>
+                    </a>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="ft">
+        <div class="wrap">
+            <a class="ft-map" href="https://map.naver.com/p/entry/place/1360546730" target="_blank" rel="noopener">
+                <span class="ic ic-map" aria-hidden="true"></span>네이버 지도에서 보기
+            </a>
+            <p class="ft-line">
+                <img class="ft-mark" src="images/favicon.svg" alt="" width="18" height="18">
+                <b>편한 펫택시&amp;피크닉</b>
+                <span>경기 남양주시 백봉로 32</span>
+                <span>대표 0507-1417-6722</span>
+                <span>남양주 010-2300-6722</span>
+                <span>인천 010-4707-7334</span>
+                <span>24시간 연중무휴</span>
+            </p>
+            <p class="ft-copy">© 편한 펫택시&amp;피크닉. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "LocalBusiness",
+      "name": "편한 펫택시&피크닉",
+      "description": "위생 관리와 안전 운행을 바탕으로 병원, 미용, 공항, 이사, 장례식장 및 전국 장거리 이동을 지원하는 반려동물 전용 이동 서비스입니다.",
+      "image": "https://arevampedpettaxi.co.kr/images/og-image.jpg",
+      "telephone": "+82-507-1417-6722",
+      "address": {
+        "@type": "PostalAddress",
+        "streetAddress": "백봉로 32",
+        "addressLocality": "남양주시",
+        "addressRegion": "경기도",
+        "addressCountry": "KR"
+      },
+      "areaServed": "대한민국",
+      "openingHours": "Mo-Su 00:00-23:59",
+      "url": "https://arevampedpettaxi.co.kr/"
+    }
+    </script>
+    <script src="site.js?v=9b979e79"></script>
+    <script src="reviews.js?v=9b979e79"></script>
+    <script src="script.js?v=9b979e79"></script>
+</body>
+</html>

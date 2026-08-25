@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<!--
+  ================================================================
+  편한 펫택시&피크닉 — 이용후기
+
+  후기 내용은 reviews.js 한 곳에서 관리합니다.
+  네이버 플레이스(개편한펫택시)에 실제로 등록된 방문자 리뷰입니다.
+  ================================================================
+-->
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <title>이용후기 | 편한 펫택시&amp;피크닉</title>
+    <meta name="description" content="편한 펫택시&피크닉을 이용하신 보호자들의 실제 후기입니다. 병원 이동, 지방 장거리, 고양이 이동까지 네이버 플레이스에 등록된 후기를 그대로 옮겨 왔습니다.">
+    <meta name="theme-color" content="#14120D">
+    <link rel="canonical" href="https://arevampedpettaxi.co.kr/review.html">
+    <meta property="og:type" content="website">
+    <meta property="og:site_name" content="편한 펫택시&피크닉">
+    <meta property="og:title" content="이용후기 | 편한 펫택시&피크닉">
+    <meta property="og:description" content="보호자들이 직접 남긴 실제 이용 후기입니다.">
+    <meta property="og:url" content="https://arevampedpettaxi.co.kr/review.html">
+    <meta property="og:image" content="https://arevampedpettaxi.co.kr/images/og-image.jpg">
+    <meta property="og:locale" content="ko_KR">
+
+    <link rel="icon" href="favicon.ico" sizes="any">
+    <link rel="icon" type="image/svg+xml" href="images/favicon.svg">
+    <link rel="apple-touch-icon" href="images/favicon-180.png">
+
+    <link rel="preconnect" href="https://cdn.jsdelivr.net">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;500;600&display=swap">
+    <link rel="stylesheet" href="styles.css?v=9b979e79">
+</head>
+<body>
+    <a class="skip-link" href="#main">본문 바로가기</a>
+
+    <header class="hd">
+        <div class="wrap hd-in">
+            <a class="hd-logo" href="index.html" aria-label="편한 펫택시앤피크닉 홈">
+                <img class="hd-mark" src="images/favicon.svg" alt="" width="26" height="26">
+                <span class="hd-name">편한 <em>펫택시</em>&amp;피크닉</span>
+            </a>
+            <span class="hd-sp"></span>
+            <button class="hd-cta" type="button" data-call>
+                <span class="ic ic-phone" aria-hidden="true"></span>전화 상담
+            </button>
+            <button class="nav-fold" type="button" id="nav-fold" aria-expanded="false" aria-controls="navpanel" aria-label="메뉴 열기">
+                <span class="nav-burger" aria-hidden="true"><i></i><i></i></span>
+            </button>
+        </div>
+    </header>
+
+    <div class="navpanel" id="navpanel">
+        <nav class="wrap navlist" id="tabs" aria-label="바로가기">
+            <a class="tab" href="index.html#home">홈</a>
+            <a class="tab" href="index.html#car">차량</a>
+            <a class="tab" href="index.html#clean">소독</a>
+            <a class="tab" href="index.html#service">서비스</a>
+                <a class="tab" href="index.html#picnic">펫크닉</a>
+            <a class="tab is-on" href="review.html" aria-current="page">후기</a>
+            <a class="tab" href="quote.html">견적 요청</a>
+        </nav>
+    </div>
+
+
+    
+    <main id="main">
+        <section class="sec">
+            <div class="wrap">
+                <div class="sec-head">
+                    <span class="eyebrow">Review</span>
+                    <h1 class="sec-title">보호자님들이 전하는 <em>이용 경험</em></h1>
+                    <p class="sec-desc">
+                        네이버 플레이스에 보호자님들이 직접 남긴 <b id="rv-count">20</b>건의 이용 후기를 소개합니다.
+                        모든 후기는 원문 그대로 제공됩니다.
+                    </p>
+                </div>
+
+                <a class="btn btn-naver btn-block btn-lg" style="margin-bottom:14px"
+                   href="https://map.naver.com/p/entry/place/1360546730" target="_blank" rel="noopener">
+                    <span class="ic ic-map" aria-hidden="true"></span>네이버에서 후기 남기기
+                </a>
+
+                <div class="rv-list" id="rv-list"></div>
+
+            </div>
+        </section>
+    </main>
+
+    <footer class="ft">
+        <div class="wrap">
+            <a class="ft-map" href="https://map.naver.com/p/entry/place/1360546730" target="_blank" rel="noopener">
+                <span class="ic ic-map" aria-hidden="true"></span>네이버 지도에서 보기
+            </a>
+            <p class="ft-line">
+                <img class="ft-mark" src="images/favicon.svg" alt="" width="18" height="18">
+                <b>편한 펫택시&amp;피크닉</b>
+                <span>경기 남양주시 백봉로 32</span>
+                <span>대표 0507-1417-6722</span>
+                <span>남양주 010-2300-6722</span>
+                <span>인천 010-4707-7334</span>
+                <span>24시간 연중무휴</span>
+            </p>
+            <p class="ft-copy">© 편한 펫택시&amp;피크닉. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script src="site.js?v=9b979e79"></script>
+    <script src="reviews.js?v=9b979e79"></script>
+    <script src="script.js?v=9b979e79"></script>
+</body>
+</html>
