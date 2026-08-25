@@ -89,7 +89,6 @@ body {
     font-size: var(--fs-15);
     line-height: 1.55;
     word-break: keep-all;
-    overflow-x: hidden;
     padding-bottom: env(safe-area-inset-bottom);
     -webkit-font-smoothing: antialiased;
 }
@@ -662,7 +661,14 @@ body.is-desktop .branch-item > .ic-arrow { display: none; }
     -webkit-user-select: none; user-select: none;
 }
 .lb.is-on { display: block; }
-body.lb-open { overflow: hidden; }
+/* 창이 열려 있는 동안 뒤 배경이 스크롤되지 않게 잠급니다.
+   position: fixed 로 잡고 원래 위치를 top 으로 보정해, 닫을 때 제자리로 돌아옵니다.
+   (overflow 만 쓰면 브라우저가 맨 위로 튀어 버튼이 안 눌린 것처럼 보입니다) */
+body.lb-open {
+    position: fixed;
+    left: 0; right: 0; width: 100%;
+    overflow: hidden;
+}
 
 .lb-stage { position: absolute; inset: 0; overflow: hidden; }
 .lb-img {

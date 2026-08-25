@@ -24,6 +24,32 @@
 
     var reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
 
+    /* ----------------------------------------------------------------
+       배경 스크롤 잠금
+       창이 열릴 때 보고 있던 위치를 기억해 두고, 닫을 때 그 자리로 되돌립니다.
+       이렇게 하지 않으면 창을 여는 순간 페이지가 맨 위로 튀어
+       버튼이 안 눌린 것처럼 보입니다.
+       ---------------------------------------------------------------- */
+
+    var lockY = 0, isLocked = false;
+
+    function lockScroll() {
+        if (isLocked) { return; }          /* 이미 잠겨 있으면 위치를 덮어쓰지 않습니다 */
+        isLocked = true;
+        lockY = window.pageYOffset || document.documentElement.scrollTop || 0;
+        document.body.style.top = (-lockY) + 'px';
+        document.body.classList.add('lb-open');
+    }
+
+    function unlockScroll() {
+        if (!isLocked) { return; }
+        isLocked = false;
+        document.body.classList.remove('lb-open');
+        document.body.style.top = '';
+        window.scrollTo(0, lockY);
+    }
+
+
     /* 모바일인지 — 전화 걸기·메시지 보내기가 실제로 되는 환경인지 판단합니다 */
     var isMobile = /Android|iPhone|iPad|iPod|IEMobile|Opera Mini/i.test(navigator.userAgent) ||
                    (window.matchMedia('(pointer: coarse)').matches &&
@@ -124,7 +150,7 @@
         if (!lbList.length) { return; }
         lbLast = opener || null;
         lb.classList.add('is-on');
-        document.body.classList.add('lb-open');
+        lockScroll();
         show(index || 0);
         lb.querySelector('[data-lb-close]').focus();
         document.addEventListener('keydown', onKey);
@@ -132,7 +158,7 @@
 
     function closeLb() {
         lb.classList.remove('is-on');
-        document.body.classList.remove('lb-open');
+        unlockScroll();
         document.removeEventListener('keydown', onKey);
         if (lbLast) { lbLast.focus(); lbLast = null; }
     }
@@ -503,7 +529,7 @@
             });
             sheetBack.classList.add('is-on');
             sheet.classList.add('is-on');
-            document.body.classList.add('lb-open');
+            lockScroll();
             sheetList.querySelector('.branch-item').focus();
             document.addEventListener('keydown', onSheetKey);
             return;
@@ -562,7 +588,7 @@
         sheetLast = document.activeElement;
         sheetBack.classList.add('is-on');
         sheet.classList.add('is-on');
-        document.body.classList.add('lb-open');
+        lockScroll();
         var first = sheetList.querySelector('.branch-item');
         if (first) { first.focus(); }
         document.addEventListener('keydown', onSheetKey);
@@ -572,7 +598,7 @@
         if (!sheet) { return; }
         sheetBack.classList.remove('is-on');
         sheet.classList.remove('is-on');
-        document.body.classList.remove('lb-open');
+        unlockScroll();
         document.removeEventListener('keydown', onSheetKey);
         if (sheetLast && sheetLast.focus) { sheetLast.focus(); sheetLast = null; }
     }
