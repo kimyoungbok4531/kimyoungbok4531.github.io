@@ -361,15 +361,30 @@ main .sec + .sec { border-top: 8px solid var(--paper-2); }
 .shot-cap span { display: block; margin-top: 1px; font-size: var(--fs-11); color: rgba(255,255,255,.7); }
 
 /* 펫크닉 안내 포스터 — 글자를 읽어야 하므로 다른 사진보다 크게,
-   자르지 않고 원본 비율 그대로 보여 줍니다. */
-.poster-grid { display: grid; gap: 10px; align-items: start; }
+   자르지 않고 원본 비율 그대로 보여 줍니다.
+   모바일에서는 다른 사진들과 같이 옆으로 넘겨 봅니다. */
+.poster-grid {
+    display: flex; gap: 8px;
+    overflow-x: auto; scroll-snap-type: x proximity;
+    -webkit-overflow-scrolling: touch; scrollbar-width: none;
+    margin: 0 calc(-1 * var(--pad)); padding: 0 var(--pad) 4px;
+    scroll-padding-left: var(--pad);
+}
+.poster-grid::-webkit-scrollbar { display: none; }
+.poster-grid > * { flex: 0 0 auto; width: 76%; max-width: 300px; scroll-snap-align: start; }
 .poster-grid .shot { aspect-ratio: auto; background: var(--paper-2); }
 .poster-grid .shot img { height: auto; }
 .poster-grid .shot:hover img { transform: none; }
 /* 포스터에 이미 제목이 있어 겹치는 캡션은 감춥니다 (확대 화면에는 그대로 나옵니다) */
 .poster-grid .shot-cap { display: none; }
+
 @media (min-width: 768px) {
-    .poster-grid { grid-template-columns: repeat(2, 1fr); gap: 18px; max-width: 900px; }
+    .poster-grid {
+        display: grid; grid-template-columns: repeat(2, 1fr);
+        gap: 18px; max-width: 900px;
+        overflow: visible; margin: 0; padding: 0; align-items: start;
+    }
+    .poster-grid > * { width: auto; max-width: none; }
 }
 
 /* 사진 카드는 종류에 상관없이 한 규격을 씁니다.
@@ -401,18 +416,6 @@ main .sec + .sec { border-top: 8px solid var(--paper-2); }
 /* 경고 문구는 폭 제한만 풀어 한 줄로 떨어지게 합니다. 글자 크기는 위와 동일 */
 .claim-warn .claim-body { max-width: none; }
 .claim-warn .lead em { color: var(--danger-dark); }
-
-/* 펫크닉 안내 포스터 — 글자를 읽어야 하므로 다른 사진보다 크게,
-   자르지 않고 원본 비율 그대로 보여 줍니다. */
-.poster-grid { display: grid; gap: 10px; align-items: start; }
-.poster-grid .shot { aspect-ratio: auto; background: var(--paper-2); }
-.poster-grid .shot img { height: auto; }
-.poster-grid .shot:hover img { transform: none; }
-/* 포스터에 이미 제목이 있어 겹치는 캡션은 감춥니다 (확대 화면에는 그대로 나옵니다) */
-.poster-grid .shot-cap { display: none; }
-@media (min-width: 768px) {
-    .poster-grid { grid-template-columns: repeat(2, 1fr); gap: 18px; max-width: 900px; }
-}
 
 /* 사진 카드는 종류에 상관없이 한 규격을 씁니다.
    다음 카드가 살짝 보이게 잡아 옆으로 넘길 수 있음을 알려 줍니다. */
