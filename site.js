@@ -1,5 +1,5 @@
 /* ==================================================================
-   편한 펫택시&피크닉 — 사이트 설정
+   개편한펫택시&피크닉 — 사이트 설정
 
    ★ 내용을 바꾸고 싶으면 이 파일만 고치면 됩니다. ★
    다른 파일(script.js, styles.css)은 건드리지 않아도 됩니다.
@@ -46,8 +46,8 @@ var BRANCHES = [
    ------------------------------------------------------------------ */
 
 var CAR_PHOTOS = [
-    { src: 'images/car-01-white-exterior.jpg', cap: '기아 PV5 · 화이트',        alt: '편한 펫택시 화이트 PV5 차량 외관' },
-    { src: 'images/car-02-blue-exterior.jpg',  cap: '기아 PV5 · 스카이블루',    alt: '편한 펫택시 스카이블루 PV5 차량 외관' },
+    { src: 'images/car-01-white-exterior.jpg', cap: '기아 PV5 · 화이트',        alt: '개편한펫택시 화이트 PV5 차량 외관' },
+    { src: 'images/car-02-blue-exterior.jpg',  cap: '기아 PV5 · 스카이블루',    alt: '개편한펫택시 스카이블루 PV5 차량 외관' },
     { src: 'images/car-07-door-open.jpg',      cap: '넓은 슬라이딩 승차구',      alt: '슬라이딩 도어를 열어 둔 차량 승차구' },
     { src: 'images/car-03-interior-bed.jpg',   cap: '풀 플랫 시트',             alt: '평평하게 펼친 차량 실내 시트' },
     { src: 'images/car-04-interior-table.jpg', cap: '테이블 모드',              alt: '테이블을 세운 차량 실내' },

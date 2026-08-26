@@ -1,5 +1,5 @@
 /* ==================================================================
-   편한 펫택시&피크닉 — 견적 요청서
+   개편한펫택시&피크닉 — 견적 요청서
 
    서버로 보내지 않습니다. 입력한 내용은 브라우저 안에서만 처리되고
    "복사" 또는 "다운로드" 를 눌렀을 때만 밖으로 나갑니다.
@@ -112,7 +112,7 @@
 
     /* 메시지·카카오톡에 붙여넣기 좋은 형태 */
     function plainText() {
-        var lines = ['[편한 펫택시&피크닉 견적 요청]'];
+        var lines = ['[개편한펫택시&피크닉 견적 요청]'];
         rows().forEach(function (r) {
             if (r[0] === 'head') { lines.push('', '· ' + r[1]); }
             else if (r[1])       { lines.push('  ' + r[0] + ' : ' + r[1]); }
@@ -432,7 +432,7 @@
             }
             /* 저장되는 파일 이름이 되므로 잠시 문서 제목을 바꿉니다 */
             var title = document.title;
-            document.title = '편한펫택시_견적요청서_' + (val('q-date') || '').replace(/-/g, '');
+            document.title = '개편한펫택시_견적요청서_' + (val('q-date') || '').replace(/-/g, '');
             window.print();
             window.setTimeout(function () { document.title = title; }, 600);
             showSendBox();
