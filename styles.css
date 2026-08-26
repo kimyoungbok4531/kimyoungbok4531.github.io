@@ -186,7 +186,7 @@ table { border-collapse: collapse; }
 body.nav-open .hd { background: rgba(255,255,255,.985); }
 .hd-in { height: var(--hd); display: flex; align-items: center; gap: 8px; }
 .hd-logo { display: flex; align-items: center; gap: 7px; flex: 0 1 auto; min-width: 0; min-height: 48px; padding-right: 4px; }
-.hd-mark { width: 26px; height: 26px; border-radius: 7px; flex: 0 0 auto; }
+.hd-mark { width: 30px; height: 30px; flex: 0 0 auto; }
 .hd-name {
     font-size: var(--fs-15); font-weight: 800; letter-spacing: -.035em;
     white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
@@ -911,7 +911,7 @@ body.lb-open {
     :root { --hd: 60px; --fs-11: 12.5px; --fs-12: 13.5px; --fs-13: 14.5px; --fs-15: 16px; --fs-17: 19px; --fs-20: 23px; }
     :root { --pad: 24px; }
 
-    .hd-mark { width: 30px; height: 30px; }
+    .hd-mark { width: 34px; height: 34px; }
     .hd-cta { min-height: 44px; padding: 0 17px; font-size: var(--fs-13); }
     .tab { padding: 0 18px; }
 
