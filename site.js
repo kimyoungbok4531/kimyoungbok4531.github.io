@@ -27,7 +27,7 @@ var BRANCHES = [
     {
         name: '남양주지사', desc: '김승현 대표',            main: false,
         tel: '010-2300-6722',
-        kakao: ''                                    /* ★ 카카오톡 채팅방 주소가 나오면 여기에 넣어 주세요 */
+        kakao: 'https://open.kakao.com/o/spPTPNKi'
     },
     {
         name: '인천지사',   desc: '손진구 대표',            main: false,
