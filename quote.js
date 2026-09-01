@@ -17,6 +17,7 @@
     var clamp = U.clamp || function (v, a, b) { return Math.min(b, Math.max(a, v)); };
     var isMobile = typeof U.isMobile === 'boolean' ? U.isMobile
                  : /Android|iPhone|iPad|iPod|IEMobile|Opera Mini/i.test(navigator.userAgent);
+    var isAndroid = /Android/i.test(navigator.userAgent);
 
     function $(id) { return document.getElementById(id); }
     function all(sel, root) { return Array.prototype.slice.call((root || document).querySelectorAll(sel)); }
@@ -112,12 +113,16 @@
     /* 미리보기 화면을 두지 않습니다. 복사·다운로드할 때 그 자리에서 만듭니다. */
     function render() {}
 
-    /* 메시지에 붙여넣기 좋은 형태 */
+    /* 메시지에 붙여넣기 좋은 형태.
+
+       공백 하나가 주소에서는 3자(%20)가 되고 한글은 9자가 됩니다.
+       안드로이드 메시지 앱은 긴 본문을 잘라내는 경우가 있어
+       들여쓰기와 빈 줄을 두지 않고 되도록 짧게 만듭니다. */
     function plainText() {
         var lines = ['[개편한펫택시&피크닉 견적 요청]'];
         rows().forEach(function (r) {
-            if (r[0] === 'head') { lines.push('', '· ' + r[1]); }
-            else if (r[1])       { lines.push('  ' + r[0] + ' : ' + r[1]); }
+            if (r[0] === 'head') { lines.push('▶ ' + r[1]); }
+            else if (r[1])       { lines.push(r[0] + ': ' + r[1]); }
         });
         return lines.join('\n');
     }
@@ -379,11 +384,16 @@
                     return;
                 }
 
-                /* 주소가 길면 앱이 본문을 잘라낼 수 있어 원문을 복사해 둡니다 */
+                /* 안드로이드 메시지 앱은 긴 본문을 잘라내는 일이 있습니다.
+                   그래서 원문을 미리 복사해 두고 붙여넣는 법을 안내합니다. */
                 var url = smsUrl(tel, text);
-                if (url.length > SMS_SAFE_LEN && U.copyText) {
+                var risky = isAndroid || url.length > SMS_SAFE_LEN;
+
+                if (risky && U.copyText) {
                     U.copyText(text, function () {});
-                    note('내용이 길어 문자에 다 담기지 않을 수 있습니다. 잘렸다면 메시지 창에 붙여넣기 해주세요.');
+                    note(isAndroid
+                        ? '견적서를 복사해 두었습니다. 문자 내용이 잘렸다면 입력창을 길게 눌러 붙여넣기 해주세요.'
+                        : '내용이 길어 문자에 다 담기지 않을 수 있습니다. 잘렸다면 메시지 창에 붙여넣기 해주세요.');
                 }
                 window.location.href = url;
             });

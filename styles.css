@@ -816,12 +816,10 @@ body.lb-open {
 
 
 .quote-actions { display: grid; gap: 8px; margin-top: 18px; }
-.quote-actions .btn { width: 100%; }
+.quote-actions .btn { width: 100%; margin: 0; align-self: stretch; }
 .quote-actions[hidden] { display: none; }
 
 /* 복사·다운로드를 마치면 그 자리에 나타납니다 */
-#q-send { margin-top: 18px; }
-#q-send[hidden] { display: none; }
 .quote-guide {
     margin-top: 10px; padding: 10px 13px;
     background: var(--brand-soft); border-radius: var(--r);
