@@ -384,16 +384,11 @@
                     return;
                 }
 
-                /* 안드로이드 메시지 앱은 긴 본문을 잘라내는 일이 있습니다.
-                   그래서 원문을 미리 복사해 두고 붙여넣는 법을 안내합니다. */
+                /* 내용이 아주 길면 앱이 잘라낼 수 있어 원문을 복사해 둡니다 */
                 var url = smsUrl(tel, text);
-                var risky = isAndroid || url.length > SMS_SAFE_LEN;
-
-                if (risky && U.copyText) {
+                if (url.length > SMS_SAFE_LEN && U.copyText) {
                     U.copyText(text, function () {});
-                    note(isAndroid
-                        ? '견적서를 복사해 두었습니다. 문자 내용이 잘렸다면 입력창을 길게 눌러 붙여넣기 해주세요.'
-                        : '내용이 길어 문자에 다 담기지 않을 수 있습니다. 잘렸다면 메시지 창에 붙여넣기 해주세요.');
+                    note('내용이 길어 문자에 다 담기지 않을 수 있습니다. 잘렸다면 입력창을 길게 눌러 붙여넣기 해주세요.');
                 }
                 window.location.href = url;
             });
@@ -429,9 +424,19 @@
 
     var SMS_SAFE_LEN = 2500;
 
+    /* 안드로이드 일부 브라우저는 메시지 앱에 넘기기 전에 주소를 한 번 더 풀어 냅니다.
+       그러면 본문 안의 %26 이 & 로 되돌아가고, 메시지 앱이 그것을 파라미터
+       구분자로 읽어 그 앞까지만 남깁니다. (상호의 '&' 때문에 잘리던 원인)
+       구분자로 오해받는 글자는 생김새가 같은 전각 문자로 바꿔 보냅니다. */
+    function safeBody(text) {
+        return String(text)
+            .replace(/&/g, '＆')      /* U+FF06 — 파라미터 구분자로 읽히지 않습니다 */
+            .replace(/#/g, '＃');     /* U+FF03 — 조각(fragment) 구분자 방지 */
+    }
+
     function smsUrl(tel, text) {
         var ios = /iPhone|iPad|iPod|Macintosh/.test(navigator.userAgent);
-        return 'sms:' + tel + '?' + (ios ? '&' : '') + 'body=' + encodeURIComponent(text);
+        return 'sms:' + tel + '?' + (ios ? '&' : '') + 'body=' + encodeURIComponent(safeBody(text));
     }
 
     var sendBtn = $('q-send');
