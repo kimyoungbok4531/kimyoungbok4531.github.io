@@ -541,7 +541,6 @@ main .sec + .sec { border-top: 8px solid var(--paper-2); }
     background: var(--brand-soft); color: var(--brand-dark); border-radius: 11px; font-size: 21px;
 }
 .contact-ic.is-naver { background: #E7F9EE; color: var(--naver-dark); }
-.contact-ic.is-kakao { background: #FEF3C3; color: #3C1E1E; }
 .contact-b { flex: 1 1 auto; min-width: 0; }
 .ct-k { display: block; font-size: var(--fs-11); font-weight: 700; color: var(--ink-3); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
 .ct-v { display: block; font-size: var(--fs-15); font-weight: 800; letter-spacing: -.025em; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
@@ -852,6 +851,17 @@ body.lb-open {
 }
 .sendbox-t .ic { font-size: 17px; }
 .sendbox-d { margin: 4px 0 14px; font-size: var(--fs-12); line-height: 1.55; color: var(--ink-2); }
+
+/* 문자 본문이 잘릴 수 있을 때 뜨는 안내 */
+.sendnote {
+    margin-top: 10px;
+    padding: 10px 12px;
+    background: #FFF4E6;
+    border-radius: 8px;
+    font-size: 13px;
+    line-height: 1.6;
+    color: #6B5D52;
+}
 
 .sendgroup + .sendgroup { margin-top: 8px; }
 .sendhead {

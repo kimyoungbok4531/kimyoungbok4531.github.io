@@ -110,7 +110,7 @@
     /* 미리보기 화면을 두지 않습니다. 복사·다운로드할 때 그 자리에서 만듭니다. */
     function render() {}
 
-    /* 메시지·카카오톡에 붙여넣기 좋은 형태 */
+    /* 메시지에 붙여넣기 좋은 형태 */
     function plainText() {
         var lines = ['[개편한펫택시&피크닉 견적 요청]'];
         rows().forEach(function (r) {
@@ -291,7 +291,7 @@
 
     /* ================================================================
        7-1. 견적서 보내기 — 복사·다운로드를 마치면 나타납니다
-            메시지와 카카오톡 중에서 영업점을 골라 접수합니다.
+            문의하실 영업점을 골라 접수합니다.
        ================================================================ */
 
     var sendBox = $('sendbox'), sendDrawn = false;
@@ -324,19 +324,16 @@
             '</div>';
         }
 
+        /* 누를 때 본문을 만들어 붙입니다. href 는 본문 없는 형태로 남겨 두어
+           자바스크립트가 막힌 환경에서도 번호는 뜨게 합니다. */
         var sms = BRANCHES.map(function (b) {
-            return item(b.name, b.tel, 'sms:' + String(b.tel).replace(/[^0-9]/g, ''), false);
+            var tel = String(b.tel).replace(/[^0-9]/g, '');
+            return item(b.name, b.tel, 'sms:' + tel, false).replace('<a class="senditem"', '<a class="senditem" data-smstel="' + tel + '"');
         }).join('');
-        var kakao = BRANCHES.map(function (b) {
-            return b.kakao ? item(b.name, '카카오톡 열기', b.kakao, false)
-                           : item(b.name, '카카오톡', '', true);
-        }).join('');
-
         sendBox.innerHTML =
             '<p class="sendbox-t"><span class="ic ic-doc" aria-hidden="true"></span>견적서 보내기</p>' +
             '<p class="sendbox-d">복사하거나 내려받은 견적서를 <b>문의하실 영업점으로 접수</b>해 주세요.</p>' +
-            group('sms', 'ic-sms', '메시지로 접수', sms) +
-            group('kakao', 'ic-talk', '카카오톡으로 접수', kakao);
+            group('sms', 'ic-sms', '메시지로 접수', sms);
 
         /* 한 번에 하나만 펼칩니다 */
         all('.sendhead', sendBox).forEach(function (h) {
@@ -354,35 +351,70 @@
                 }
             });
         });
+        /* 메시지 항목 — 누르는 순간의 입력 내용으로 본문을 만들어 넣습니다 */
+        all('[data-smstel]', sendBox).forEach(function (a) {
+            a.addEventListener('click', function (e) {
+                var text = plainText();
+                var url = smsUrl(a.getAttribute('data-smstel'), text);
+
+                /* 주소가 길면 앱이 본문을 잘라낼 수 있어 원문을 복사해 둡니다 */
+                if (url.length > SMS_SAFE_LEN && U.copyText) {
+                    U.copyText(text, function () {});
+                    note('내용이 길어 문자에 다 담기지 않을 수 있습니다. 잘렸다면 메시지 창에 붙여넣기 해주세요.');
+                }
+                e.preventDefault();
+                window.location.href = url;
+            });
+        });
+
         sendDrawn = true;
     }
 
-    /* 모바일에서는 복사·다운로드를 마치면 그 버튼이 '견적서 보내기' 로 바뀝니다.
-       내용을 다시 고치면 복사가 필요하므로 원래 버튼으로 되돌립니다. */
-    var actionsBox = $('q-actions'), sendBtn = $('q-send'), swapped = false;
-    var mqMobile = window.matchMedia('(max-width: 767px)');
-
-    function swapToSend(on) {
-        if (!actionsBox || !sendBtn) { return; }
-        swapped = on;
-        actionsBox.hidden = on;
-        sendBtn.hidden = !on;
+    /* 접수 목록 아래에 잠깐 뜨는 안내 */
+    function note(msg) {
+        if (!sendBox) { return; }
+        var el = sendBox.querySelector('.sendnote');
+        if (!el) {
+            el = document.createElement('p');
+            el.className = 'sendnote';
+            el.setAttribute('role', 'status');
+            sendBox.appendChild(el);
+        }
+        el.textContent = msg;
     }
 
+    /* ----------------------------------------------------------------
+       메시지 주소 만들기
+
+       sms: 는 브라우저가 아니라 기기의 메시지 앱이 처리하는 주소입니다.
+       body= 에 넣은 글이 메시지 입력창에 미리 채워집니다.
+       iOS 는 'sms:번호?&body=', 안드로이드는 'sms:번호?body=' 로 받습니다.
+
+       한글은 인코딩하면 글자당 9자로 늘어납니다. 요청사항까지 길게 쓰면
+       주소가 3천 자를 넘어 일부 기기에서 잘릴 수 있어, 그럴 때는
+       클립보드에 원문을 넣어 두고 붙여넣기로 안내합니다.
+       ---------------------------------------------------------------- */
+
+    var SMS_SAFE_LEN = 2500;
+
+    function smsUrl(tel, text) {
+        var ios = /iPhone|iPad|iPod|Macintosh/.test(navigator.userAgent);
+        return 'sms:' + tel + '?' + (ios ? '&' : '') + 'body=' + encodeURIComponent(text);
+    }
+
+    var sendBtn = $('q-send');
+
+    /* 내용을 고치면 이전 안내는 지웁니다. 메시지 본문은 누를 때 다시 만들어
+       항상 최신 입력이 들어가므로 따로 되돌릴 것은 없습니다. */
     function restoreActions() {
-        if (swapped) { swapToSend(false); }
-    }
-
-    /* 화면 폭이 바뀌면 상태를 다시 맞춥니다 */
-    if (mqMobile.addEventListener) {
-        mqMobile.addEventListener('change', function () { if (!mqMobile.matches) { restoreActions(); } });
+        var el = sendBox && sendBox.querySelector('.sendnote');
+        if (el && el.parentNode) { el.parentNode.removeChild(el); }
     }
 
     function showSendBox() {
         if (!sendBox) { return; }
         drawSendBox();
         if (!sendBox.hidden) { return; }
-        if (mqMobile.matches) { swapToSend(true); }
         sendBox.hidden = false;
         document.body.classList.add('is-sent');
         var first = sendBox.querySelector('.sendgroup');
@@ -395,20 +427,12 @@
     }
 
 
-    var copyBtn = $('q-copy');
-    if (copyBtn && U.copyText) {
-        copyBtn.addEventListener('click', function () {
-            var old = copyBtn.innerHTML;
-            U.copyText(plainText(), function (ok) {
-                if (!ok) { return; }
-                copyBtn.classList.add('is-done');
-                copyBtn.innerHTML = '복사했습니다 · 아래에서 접수하세요';
-                showSendBox();
-                window.setTimeout(function () {
-                    copyBtn.innerHTML = old;
-                    copyBtn.classList.remove('is-done');
-                }, 2400);
-            });
+    /* 보내기 — 원문을 클립보드에 넣어 두고 접수처 목록을 폅니다.
+       메시지 앱이 본문을 못 받는 경우에도 바로 붙여넣을 수 있습니다. */
+    if (sendBtn) {
+        sendBtn.addEventListener('click', function () {
+            if (U.copyText) { U.copyText(plainText(), function () {}); }
+            showSendBox();
         });
     }
 

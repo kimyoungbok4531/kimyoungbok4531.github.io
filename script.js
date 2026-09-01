@@ -499,62 +499,16 @@
         if (typeof BRANCHES === 'undefined' || !BRANCHES.length) { return; }
         if (!sheet) { buildSheet(); }
 
-        var sms = mode === 'sms', kakao = mode === 'kakao', pick = mode === 'send';
-        sheetT.textContent = pick  ? '어떻게 보낼까요?'
-                           : kakao ? '카카오톡으로 문의할 영업점을 선택해 주세요'
-                           : sms   ? '문의하실 영업점을 선택해 주세요'
-                                   : '상담하실 영업점을 선택해 주세요';
-        sheetD.textContent = pick
-            ? '견적서를 복사한 뒤 보낼 방법을 골라 주세요.'
-            : kakao
-            ? '카카오톡으로 바로 연결됩니다. 아직 열리지 않은 영업점은 메시지로 문의해 주세요.'
-            : sms
+        var sms = mode === 'sms' || mode === 'send';
+        sheetT.textContent = sms ? '문의하실 영업점을 선택해 주세요'
+                                 : '상담하실 영업점을 선택해 주세요';
+        sheetD.textContent = sms
             ? '운행 중 통화가 어려울 수 있습니다. 메시지를 남겨주시면 확인 후 안내드립니다.'
             : '24시간 연중무휴로 상담을 운영합니다. 가까운 영업점을 선택해 주세요.';
 
-        if (pick) {
-            sheetList.innerHTML =
-                '<button class="branch-item is-main" type="button" data-pick="sms">' +
-                    '<span class="branch-b">' +
-                        '<span class="branch-n">메시지</span>' +
-                        '<span class="branch-tel">메시지로 보내기</span>' +
-                    '</span><span class="ic ic-arrow" aria-hidden="true"></span></button>' +
-                '<button class="branch-item" type="button" data-pick="kakao">' +
-                    '<span class="branch-b">' +
-                        '<span class="branch-n">카카오톡</span>' +
-                        '<span class="branch-tel">카카오톡으로 보내기</span>' +
-                    '</span><span class="ic ic-arrow" aria-hidden="true"></span></button>';
-            all('[data-pick]', sheetList).forEach(function (b) {
-                b.addEventListener('click', function (e) { e.stopPropagation(); openSheet(b.getAttribute('data-pick')); });
-            });
-            sheetBack.classList.add('is-on');
-            sheet.classList.add('is-on');
-            lockScroll();
-            sheetList.querySelector('.branch-item').focus();
-            document.addEventListener('keydown', onSheetKey);
-            return;
-        }
-
-        /* 카카오톡은 채팅방을 운영하는 영업점만 보여 줍니다.
-           site.js 에 kakao 줄이 없는 영업점은 목록에서 빠집니다. */
-        var pool = kakao
-            ? BRANCHES.filter(function (b) { return typeof b.kakao === 'string'; })
-            : BRANCHES;
+        var pool = BRANCHES;
 
         sheetList.innerHTML = pool.map(function (b) {
-            if (kakao) {
-                var inner2 =
-                    '<span class="branch-b">' +
-                        '<span class="branch-n">' + esc(b.name) +
-                            (b.main ? '<span class="pill">대표</span>' : '') + '</span>' +
-                        '<span class="branch-tel">' + (b.kakao ? '카카오톡 열기' : '준비 중') + '</span>' +
-                    '</span>' +
-                    (b.kakao ? '<span class="ic ic-arrow" aria-hidden="true"></span>' : '');
-                return b.kakao
-                    ? '<a class="branch-item" href="' + esc(b.kakao) + '" target="_blank" rel="noopener">' + inner2 + '</a>'
-                    : '<div class="branch-item is-off">' + inner2 + '</div>';
-            }
-
             var href = (sms ? 'sms:' : 'tel:') + telDigits(b.tel);
             var inner =
                 '<span class="branch-b">' +
@@ -584,7 +538,7 @@
             });
         });
 
-        sheet.querySelector('.sheet-note').style.display = (kakao || pick) ? 'none' : '';
+        sheet.querySelector('.sheet-note').style.display = '';
         sheetLast = document.activeElement;
         sheetBack.classList.add('is-on');
         sheet.classList.add('is-on');
@@ -619,9 +573,6 @@
 
     all('[data-sms]').forEach(function (b) {
         b.addEventListener('click', function (e) { e.stopPropagation(); openSheet('sms'); });
-    });
-    all('[data-kakao]').forEach(function (b) {
-        b.addEventListener('click', function (e) { e.stopPropagation(); openSheet('kakao'); });
     });
     all('[data-send]').forEach(function (b) {
         b.addEventListener('click', function (e) { e.stopPropagation(); openSheet('send'); });
