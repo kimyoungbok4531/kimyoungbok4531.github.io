@@ -15,6 +15,8 @@
     var esc  = U.esc  || function (t) { return String(t); };
     var pad2 = U.pad2 || function (n) { return (n < 10 ? '0' : '') + n; };
     var clamp = U.clamp || function (v, a, b) { return Math.min(b, Math.max(a, v)); };
+    var isMobile = typeof U.isMobile === 'boolean' ? U.isMobile
+                 : /Android|iPhone|iPad|iPod|IEMobile|Opera Mini/i.test(navigator.userAgent);
 
     function $(id) { return document.getElementById(id); }
     function all(sel, root) { return Array.prototype.slice.call((root || document).querySelectorAll(sel)); }
@@ -328,11 +330,13 @@
            자바스크립트가 막힌 환경에서도 번호는 뜨게 합니다. */
         var sms = BRANCHES.map(function (b) {
             var tel = String(b.tel).replace(/[^0-9]/g, '');
-            return item(b.name, b.tel, 'sms:' + tel, false).replace('<a class="senditem"', '<a class="senditem" data-smstel="' + tel + '"');
+            return item(b.name, b.tel, 'sms:' + tel, false)
+                .replace('<a class="senditem"',
+                         '<a class="senditem" data-smstel="' + tel + '" data-teldisp="' + esc(b.tel) + '"');
         }).join('');
         sendBox.innerHTML =
             '<p class="sendbox-t"><span class="ic ic-doc" aria-hidden="true"></span>견적서 보내기</p>' +
-            '<p class="sendbox-d">복사하거나 내려받은 견적서를 <b>문의하실 영업점으로 접수</b>해 주세요.</p>' +
+            '<p class="sendbox-d">접수처를 고르면 <b>메시지에 견적서가 채워집니다.</b></p>' +
             group('sms', 'ic-sms', '메시지로 접수', sms);
 
         /* 한 번에 하나만 펼칩니다 */
@@ -354,15 +358,33 @@
         /* 메시지 항목 — 누르는 순간의 입력 내용으로 본문을 만들어 넣습니다 */
         all('[data-smstel]', sendBox).forEach(function (a) {
             a.addEventListener('click', function (e) {
+                e.preventDefault();
+
                 var text = plainText();
-                var url = smsUrl(a.getAttribute('data-smstel'), text);
+                var tel  = a.getAttribute('data-smstel');
+
+                /* PC 에는 문자 앱이 없어 sms: 를 열어도 아무 일이 일어나지 않습니다.
+                   그래서 견적서를 복사해 주고 번호를 안내합니다. */
+                if (!isMobile) {
+                    if (U.copyText) {
+                        U.copyText(text, function (ok) {
+                            note(ok
+                                ? '견적서를 복사했습니다. 휴대폰 문자로 ' + a.getAttribute('data-teldisp') +
+                                  ' 번호에 붙여넣어 보내주세요.'
+                                : '휴대폰에서 ' + a.getAttribute('data-teldisp') + ' 번호로 보내주세요.');
+                        });
+                    } else {
+                        note('휴대폰에서 ' + a.getAttribute('data-teldisp') + ' 번호로 보내주세요.');
+                    }
+                    return;
+                }
 
                 /* 주소가 길면 앱이 본문을 잘라낼 수 있어 원문을 복사해 둡니다 */
+                var url = smsUrl(tel, text);
                 if (url.length > SMS_SAFE_LEN && U.copyText) {
                     U.copyText(text, function () {});
                     note('내용이 길어 문자에 다 담기지 않을 수 있습니다. 잘렸다면 메시지 창에 붙여넣기 해주세요.');
                 }
-                e.preventDefault();
                 window.location.href = url;
             });
         });

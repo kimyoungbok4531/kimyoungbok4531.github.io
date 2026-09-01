@@ -816,6 +816,7 @@ body.lb-open {
 
 
 .quote-actions { display: grid; gap: 8px; margin-top: 18px; }
+.quote-actions .btn { width: 100%; }
 .quote-actions[hidden] { display: none; }
 
 /* 복사·다운로드를 마치면 그 자리에 나타납니다 */
@@ -829,7 +830,7 @@ body.lb-open {
 .quote-guide b { color: var(--brand-deep); }
 
 /* ------------------------------------------------------------------ */
-/* 견적서 보내기 — 복사·다운로드를 마친 뒤에 나타납니다                  */
+/* 견적서 보내기 — '견적서 보내기' 를 누르면 접수처 목록이 펼쳐집니다     */
 /* ------------------------------------------------------------------ */
 
 .sendbox {
@@ -841,8 +842,6 @@ body.lb-open {
     animation: sendIn .32s var(--ease);
 }
 .sendbox[hidden] { display: none; }
-/* 모바일은 하단 고정 바의 '견적 보내기' 로 접수하므로 이 영역은 감춥니다 */
-@media (max-width: 767px) { .sendbox { display: none; } }
 @keyframes sendIn { from { opacity: 0; transform: translateY(-8px); } to { opacity: 1; transform: none; } }
 
 .sendbox-t {
