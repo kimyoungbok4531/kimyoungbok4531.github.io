@@ -76,15 +76,11 @@ var PICNIC_PHOTOS = [
 
 
 /* ------------------------------------------------------------------
-   5. 병균 · 진드기 사진   (규칙은 위와 같습니다)
-   첫 번째가 큰 사진, 나머지가 아래 작은 사진으로 들어갑니다.
+   5. 24시간 무료운구서비스 사진   (규칙은 위와 같습니다)
    ------------------------------------------------------------------ */
 
 var GERM_PHOTOS = [
-    { src: 'images/germ-01-tick-swarm.jpg',   cap: '피부 위의 진드기',   alt: '피부 위를 기어다니는 진드기 무리' },
-    { src: 'images/germ-02-dustmite.jpg',     cap: '집먼지진드기', alt: '현미경으로 확대한 집먼지진드기' },
-    { src: 'images/germ-03-tick.jpg',         cap: '진드기', alt: '현미경으로 확대한 진드기' },
-    { src: 'images/germ-04-mite-red.jpg',     cap: '붉은 진드기',   alt: '잎 위의 붉은 진드기' },
-    { src: 'images/germ-05-mite-yellow.jpg',  cap: '먼지진드기', alt: '현미경으로 확대한 먼지진드기' },
-    { src: 'images/germ-06-spore.jpg',        cap: '곰팡이 포자',   alt: '표면에 번식한 곰팡이 포자' }
+    { src: 'images/farewell-01-lounge.jpg',   cap: '몽몽이 엠파크 라운지', alt: '창밖으로 단풍 숲이 보이는 몽몽이 엠파크 라운지' },
+    { src: 'images/farewell-02-hall.jpg',     cap: '몽몽이 엠파크 추모홀', alt: '몽몽이 엠파크 1층 추모홀 내부' },
+    { src: 'images/farewell-03-exterior.jpg', cap: '몽몽이 엠파크 전경', alt: '몽몽이 엠파크 건물 외관' }
 ];
